@@ -1,0 +1,265 @@
+
+  <style>
+#employee {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#employee td, #employee th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#employee tr:nth-child(even){background-color: #f2f2f2;}
+#employee tr:nth-child(odd){background-color: #f3f3f3;}
+#employee tr:hover {background-color: #ddd;}
+
+#employee th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ccc;
+  color: white;
+}
+</style>
+
+<!--=============================================================================================================-->
+
+
+{% load static %}
+<!--<!DOCTYPE html>-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Call Details</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Day - v2.2.1
+  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
+    <div class="container d-flex">
+      <div class="contact-info mr-auto">
+        <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">inkap@kapital.com</a>
+        <i class="icofont-phone"></i> +91 94 95 4063 68
+      </div>
+      <div class="social-links">
+        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="#" class="skype"><i class="icofont-skype"></i></a>
+        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo mr-auto"><a href="index.html">KAPITAL</a></h1>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+
+
+          <li class="active"><a href="{% url 'telehome' %}">back</a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  </section>
+  <!-- End Hero -->
+
+  <main id="main">
+
+    </section><!-- End Services Section -->
+
+<!--     ======= Cta Section =======-->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="text-center">
+
+            <div class="container" >
+
+                  <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+          <center>
+      <h1 style="color:#f2f2f2"> call details</h1>
+<!--      <p style="color:#f2f2f2">Success is not the key to happiness.<br> Happiness is the key to success.<br> If you love what you are doing,<br>you will be successful</p>-->
+</center>
+
+<table id="employee">
+  <tr>
+    <th> customer name </th>
+    <th> bank name</th>
+    <th> loan amount</th>
+    <th> phone.no</th>
+    <th> loan duration </th>
+    <th> loan emi </th>
+    <th> more details </th>
+    <th> feedback </th>
+    <th> confirm </th>
+  </tr>
+   {% for cust in customer %}
+  <tr>
+    <td>{{cust.name}}</td>
+    <td>{{cust.bank}}</td>
+    <td>{{cust.loanamount}}</td>
+    <td>{{cust.mob}}</td>
+    <td>{{cust.loanduration}}</td>
+
+    <td>{{cust.emi}}</td>
+    <td><a href="{% url 'custMDEL' cust.id %}" class="btn btn-danger">click</a></td>
+    <td><form action="{% url 'telefeedAct' %}" method="post" style="border:1px solid #ccc">{% csrf_token %}<input type="text" placeholder="Enter the feedback" name="feedback" required></td>
+    <td><input type="hidden" name="custid" value="{{cust.id}}"/><button type="submit" class="btn btn-primary">submit</button></form>{{msg}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+  </div>
+  </center>
+
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+          <center>
+      <h1 style="color:#f2f2f2">After Submitting</h1>
+<!--      <p style="color:#f2f2f2">Success is not the key to happiness.<br> Happiness is the key to success.<br> If you love what you are doing,<br>you will be successful</p>-->
+</center>
+      <div class="container">
+<table id="employee">
+  <tr>
+    <th> customer name </th>
+    <th> bank name</th>
+    <th> loan amount</th>
+    <th> phone.no</th>
+    <th> loan duration </th>
+    <th> loan emi </th>
+    <th> feedback </th>
+    <th> confirm </th>
+  </tr>
+   {% for fb in addedfb %}
+  <tr>
+    <td>{{fb.cust.name}}</td>
+    <td>{{fb.cust.bank}}</td>
+    <td>{{fb.cust.loanamount}}</td>
+    <td>{{fb.cust.mob}}</td>
+    <td>{{fb.cust.loanduration}}</td>
+
+    <td>{{fb.cust.emi}}</td>
+
+    <td><form action="{% url 'telefeedEditAct' %}" method="post" style="border:1px solid #ccc">{% csrf_token %}<input type="text" placeholder="Enter the feedback" name="feedback" value="{{fb.feedback}}" required></td>
+    <td><input type="hidden" name="feedid" value="{{fb.id}}"/><button type="submit" class="btn btn-primary">Edit</button></form>{{msg}}</td>
+
+
+  </tr>
+  {% endfor %}
+</table>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+    </section><!-- End Portfolio Section -->
+
+  <!-- ======= Footer ======= -->
+    <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info">
+              <h3>Kapital</h3>
+              <p>
+                Global Village Complex<br>
+                670001,Kannur,India<br><br>
+                <strong>Phone:</strong> +19 94 95 40 6368<br>
+                <strong>Email:</strong> inkap@kapital.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our slogan    </h4>
+<!--            <p>Work Hard Dream Big Big </p>-->
+            <strong><span>Work Hard Dream Big Big</span></strong>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        <strong><span>KAPITAL</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="">Jagath krishnan ap & Akshay mohan</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
